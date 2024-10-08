@@ -1,20 +1,31 @@
-a = int(input('Enter 1st number: '))
-b = int(input('Enter 2nd number: '))
-op = input('Enter an Valid Arithmetic operations(i.e., +,-,/,*,//,**: ')
+import math
 
-if op=='+':
-    result=a+b
-elif op=='-':
-    result=a-b
-elif op=='/':
-    result=a/b
-elif op=='%':
-    result=a%b
-elif op=='//':
-    result=a//b
-elif op=='**':
-    result=a**b
-else:
-    result='Invalid'
+def calculate(a, b, op):
+    try:
+        if op == '+':
+            return a + b
+        elif op == '-':
+            return a - b
+        elif op == '*':
+            return a * b
+        elif op == '/':
+            if b == 0:
+                raise ZeroDivisionError("Cannot divide by zero")
+            return a / b
+        else:
+            raise ValueError("Invalid operator")
+    except (ValueError, ZeroDivisionError) as e:
+        print(f"Error: {e}")
+        return None
 
-print(result)
+while True:
+    try:
+        a = float(input("Enter the first number: "))
+        b = float(input("Enter the second number: "))
+        op = input("Enter an operator (+, -, *, /): ")
+        result = calculate(a, b, op)
+        if result is not None:
+            print("Result:", result)
+        break
+    except ValueError:
+        print("Invalid input. Please enter numbers and a valid operator.")
